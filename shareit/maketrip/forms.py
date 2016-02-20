@@ -11,5 +11,8 @@ class PreTripItineraryForm(forms.Form):
     time = forms.ChoiceField(periods)
     travel = forms.ChoiceField(travelOptions)
     
-PreTripItineraryFormSet = formset_factory(PreTripItineraryForm, min_num=1,
-                                          extra=2)
+class HotelForm(forms.Form):
+    name = forms.CharField(max_length=100,
+                           widget=forms.TextInput({'onchange': 'updateHotel()'}))
+    startDate = forms.DateField(label="Start:")
+    endDate = forms.DateField(label="End:")

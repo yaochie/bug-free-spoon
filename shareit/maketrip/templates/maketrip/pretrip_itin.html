@@ -1,20 +1,62 @@
-<h1>Itinerary</h1>
+{% load staticfiles %}
+<script src="{% static "maketrip/script.js" %}"></script>
 
-<script>
-function addField() {
-    document.getElementById('id_form-TOTAL_FORMS').value++;
-}
-</script>
+<!-- Latest compiled and minified CSS 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- jQuery library 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript 
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+-->
+
+<h1>Itinerary</h1>
 
 <form method="post" action=".">
     {% csrf_token %}
-    {{ formset.management_form }}
-    {% for form in formset %}
-        {{ form.as_p }}
+    {{ hot_formset.management_form }}
+
+    <table>
+        <tr>
+        {% for form in hot_formset %}
+            <td>
+            {{ form.as_p }}
+            </td>
+        {% endfor %}
+            <td>
+                <button onclick="addHotel()">Add another accommodation</button>
+            </td>
+        </tr>
+    </table>
+    
+    <br>
+    
+    {{ att_formset.management_form }}
+    
+    <!-- Add accommodation here if necessary -->
+    <p id="accom_pre"></p>
+    <br>
+    {% for form in att_formset %}
+        {% for field in form %}
+            <!-- TODO: show errors only when trying to submit uncompleted form
+            not when adding another field
+            {% if submitted %}
+                {{ field.errors }}
+            {% endif %}
+            -->
+            <p>{{ field.label_tag }} {{ field }}</p>
+        {% endfor %}
         <br/>
     {% endfor %}
+    <!-- Add accommodation here if necessary -->
+    <p id="accom_post"></p>
+    <br/>
     <!--modify form in future for template-->
     <button onclick="addField()">Add another place</button>
+    
+    <!-- TODO: change button to delete arbitrary field -->
+    <button onclick="delField()">Delete last place</button>
     <p><input type="submit" value="Save"/></p>
 </form>
 
