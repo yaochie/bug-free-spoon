@@ -12,7 +12,12 @@ class PreTripItineraryForm(forms.Form):
     travel = forms.ChoiceField(travelOptions)
     
 class HotelForm(forms.Form):
+
+    name = forms.CharField(max_length=100,
+                           widget=forms.TextInput({'onchange': 'search()'}))
+    '''
     name = forms.CharField(max_length=100,
                            widget=forms.TextInput({'onchange': 'updateHotel()'}))
+    '''
     startDate = forms.DateField(label="Start:")
     endDate = forms.DateField(label="End:")
