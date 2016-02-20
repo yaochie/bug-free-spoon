@@ -1,26 +1,27 @@
 from django.shortcuts import redirect, render_to_response
-from .forms import PreTripItineraryForm
+from .forms import PreTripItineraryFormSet 
 from django.views.generic.edit import FormView
 from django.views import generic
-from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 # Create your views here.
-class PreTripItineraryView(FormView):
-    template_name = 'pretrip_itin.html'
-    
-    def form_valid(self, form):
-        pass
-    
 def create_itin(request):
-    form = PreTripItineraryForm(request.POST or None)
-    if form.is_valid():
-        for place in form.answers():
-            print(place)
-        return redirect("save_success")
+    if request.method == 'POST':
+        print("hi")
+        formset = PreTripItineraryFormSet(request.POST)
+        if formset.is_valid():
+            for form in formset.forms:
+                print(form.cleaned_data['place'])
+            return redirect("save_success")
+    else:
+        formset = PreTripItineraryFormSet()
         
-    return render_to_response('maketrip/pretrip_itin.html', {'form': form},
+    return render_to_response('maketrip/pretrip_itin.html', {'formset': formset},
+                              #{'formset': formset, 'empty': formset.empty_form},
                               context_instance=RequestContext(request))
+    
+#def add_form():
+    
     
 class SaveSuccess(generic.DetailView):
     template_name = "polls/save_success.html"

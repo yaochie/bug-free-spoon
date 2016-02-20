@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import formset_factory
 
 class PreTripItineraryForm(forms.Form):
     periods = [(1,u"Dawn"), (2,u"Early Morning"), (3,u"Late Morning"),
@@ -9,3 +10,6 @@ class PreTripItineraryForm(forms.Form):
     place = forms.CharField(max_length=100)
     time = forms.ChoiceField(periods)
     travel = forms.ChoiceField(travelOptions)
+    
+PreTripItineraryFormSet = formset_factory(PreTripItineraryForm, min_num=1,
+                                          extra=2)

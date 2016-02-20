@@ -1,9 +1,20 @@
 <h1>Itinerary</h1>
 
+<script>
+function addField() {
+    document.getElementById('id_form-TOTAL_FORMS').value++;
+}
+</script>
+
 <form method="post" action=".">
     {% csrf_token %}
-    {{ form }}
+    {{ formset.management_form }}
+    {% for form in formset %}
+        {{ form.as_p }}
+        <br/>
+    {% endfor %}
     <!--modify form in future for template-->
+    <button onclick="addField()">Add another place</button>
     <p><input type="submit" value="Save"/></p>
 </form>
 
