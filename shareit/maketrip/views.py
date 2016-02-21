@@ -43,15 +43,23 @@ class Itin():
                          [AttractionForm()]]
         self.current = 0
         
+    def has_changed(self):
+        for form in self.formList[self.current]:
+            if form.has_changed():
+                return True
+        return False
+        
     def all_valid(self):
         forms_valid = True
-        for form in self.formList:
-            forms_valid &= form.is_valid()
+        for forms in self.formList:
+            for form in forms:
+                forms_valid &= form.is_valid()
         return forms_valid
         
     def create_itin(self, request):
         if request.method == 'POST':
-            if request.POST['action']:
+            #print(request.POST)
+            if request.POST.get('action', False):
                 #TODO: Stop and give message if too many forms added.
                 if len(self.formList) > 10:
                     pass
@@ -72,10 +80,12 @@ class Itin():
                         self.current = 3
                     elif request.POST['action'] == "4":
                         self.current = 4
+            #check for changes, and save any changes/update saved itin
+            print()
+            if self.all_valid():
+                print("hi")
             else:
-                #validate and send info
-                if self.all_valid():
-                    pass
+                print('boo')
                 
         return render_to_response('maketrip/pretrip_itin3.html',
                                   {'forms': self.formList[self.current]},

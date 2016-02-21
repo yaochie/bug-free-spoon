@@ -19,7 +19,7 @@
 <h2>Day 1</h2>
 
 <form method="post" action=".">
-
+    {% csrf_token %}
 <nav>
   <ul class="pagination">
     <li>
@@ -51,11 +51,10 @@
 </nav>
 
 
-    {% csrf_token %}
-    
     <div id="form-fields">
     {% for form in forms %}
         {% for field in form %}
+            {{ field.errors }}
             <p>{{ field.label_tag }} {{ field }}</p>
         {% endfor %}
         <br/>
