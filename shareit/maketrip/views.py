@@ -32,16 +32,17 @@ def create_itin(request):
                               context_instance=RequestContext(request))
 
 class Itin():
-    attr_count = 0
-    hotel_count = 0
-    meal_count = 0
+    
     def __init__(self):
-        self.formList = [[AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
-                         [AttractionForm()],
-                         [AttractionForm()],
-                         [AttractionForm()],
-                         [AttractionForm()]]
         self.current = 0
+        self.attr_count = 0
+        self.hotel_count = 0
+        self.meal_count = 0
+        self.formList = [[AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))]]
         
     def all_valid(self):
         forms_valid = True
@@ -57,12 +58,16 @@ class Itin():
                     pass
                 else:
                     if request.POST['action'] == "hotel":
-                        self.formList[self.current].append(HotelForm())
+                        self.hotel_count += 1
+                        self.formList[self.current].append(HotelForm(auto_id='id_%s_{0}'.format(self.hotel_count)))
                     elif request.POST['action'] == "attr":
-                        self.formList[self.current].append(AttractionForm())
+                        self.attr_count += 1
+                        self.formList[self.current].append(AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count)))
                     elif request.POST['action'] == "meal":
-                        self.formList[self.current].append(MealForm())
+                        self.meal_count += 1
+                        self.formList[self.current].append(MealForm(auto_id='id_%s_{0}'.format(self.meal_count)))
                     elif request.POST['action'] == "0":
+                        print 0
                         self.current = 0
                     elif request.POST['action'] == "1":
                         self.current = 1
