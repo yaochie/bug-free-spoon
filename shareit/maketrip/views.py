@@ -46,7 +46,6 @@ class Itin():
             if request.POST['action']:
                 if request.POST['action'] == "hotel":
                     self.formList.append(HotelForm())
-                    self.formList.append(HotelForm())
                 elif request.POST['action'] == "attr":
                     self.formList.append(AttractionForm())
                 elif request.POST['action'] == "meal":
