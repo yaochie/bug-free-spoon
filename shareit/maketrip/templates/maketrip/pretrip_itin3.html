@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<script src="{% static "maketrip/script.js" %}"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBqEPiSyCPvIKrVneA95F-yOj3ib-d02I&libraries=places&callback=initMap2" async defer></script>
+
+<!-- Latest compiled and minified CSS 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- jQuery library 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript 
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+-->
+
+<h1>Itinerary</h1>
+
+<form method="post" action=".">
+    {% csrf_token %}
+    <input type="hidden" name="formlist" value={{ forms }}></input>
+    
+    <div id="form-fields">
+    {% for form in forms %}
+        {% for field in form %}
+            <p>{{ field.label_tag }} {{ field }}</p>
+        {% endfor %}
+        <br/>
+    {% endfor %}
+    </div>
+    
+    <!--modify form in future for template-->
+    <button type="submit" name="action" value="hotel">Add accommodation</button>
+    <button type="submit" name="action" value="attr">Add attraction</button>
+    <button type="submit" name="action" value="meal">Add meal</button>   
+    <p><input type="submit" value="Save"/></p>
+</form>
+
