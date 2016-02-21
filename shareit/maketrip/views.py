@@ -33,7 +33,12 @@ def create_itin(request):
 
 class Itin():
     def __init__(self):
-        self.formList = [AttractionForm()]
+        self.formList = [[AttractionForm()],
+                         [AttractionForm()],
+                         [AttractionForm()],
+                         [AttractionForm()],
+                         [AttractionForm()]]
+        self.current = 0
         
     def all_valid(self):
         forms_valid = True
@@ -49,18 +54,28 @@ class Itin():
                     pass
                 else:
                     if request.POST['action'] == "hotel":
-                        self.formList.append(HotelForm())
+                        self.formList[self.current].append(HotelForm())
                     elif request.POST['action'] == "attr":
-                        self.formList.append(AttractionForm())
+                        self.formList[self.current].append(AttractionForm())
                     elif request.POST['action'] == "meal":
-                        self.formList.append(MealForm())
+                        self.formList[self.current].append(MealForm())
+                    elif request.POST['action'] == "0":
+                        self.current = 0
+                    elif request.POST['action'] == "1":
+                        self.current = 1
+                    elif request.POST['action'] == "2":
+                        self.current = 2
+                    elif request.POST['action'] == "3":
+                        self.current = 3
+                    elif request.POST['action'] == "4":
+                        self.current = 4
             else:
                 #validate and send info
                 if self.all_valid():
                     pass
                 
         return render_to_response('maketrip/pretrip_itin3.html',
-                                  {'forms': self.formList},
+                                  {'forms': self.formList[self.current]},
                                   context_instance=RequestContext(request))
 
 a = Itin()

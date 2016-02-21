@@ -2,8 +2,10 @@
 <script src="{% static "maketrip/script.js" %}"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBqEPiSyCPvIKrVneA95F-yOj3ib-d02I&libraries=places&callback=initMap2" async defer></script>
 
-<!-- Latest compiled and minified CSS 
+<!-- Latest compiled and minified CSS --> 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!--
 
 <!-- jQuery library 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -14,9 +16,42 @@
 
 <h1>Itinerary</h1>
 
+<h2>Day 1</h2>
+
 <form method="post" action=".">
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li> 
+        <button type="submit" name="action" value="0">Day 1</button>
+    </li>
+    <li>
+        <button type="submit" name="action" value="1">Day 2</button> 
+    </li>
+    <li>
+        <button type="submit" name="action" value="2">Day 3</button> 
+    </li>
+    <li>
+        <button type="submit" name="action" value="3">Day 4</button> 
+    </li>
+    <li>
+        <button type="submit" name="action" value="4">Day 5</button> 
+    </li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
     {% csrf_token %}
-    <input type="hidden" name="formlist" value={{ forms }}></input>
     
     <div id="form-fields">
     {% for form in forms %}
@@ -30,7 +65,7 @@
     <!--modify form in future for template-->
     <button type="submit" name="action" value="hotel">Add accommodation</button>
     <button type="submit" name="action" value="attr">Add attraction</button>
-    <button type="submit" name="action" value="meal">Add meal</button>   
+    <button type="submit" name="action" value="meal">Add meal</button>
     <p><input type="submit" value="Save"/></p>
 </form>
 
