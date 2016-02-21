@@ -22,15 +22,6 @@
         <tr>
         {% for form in hot_formset %}
             <td>
-            <!--
-            {% for field in form %}
-                {% if field.name == 'name' %}
-                    <p>Hi</p>
-                {% else %}
-                    <p>{{ field.label }} {{ field }}</p>
-                {% endif %}
-            {% endfor %}
-            -->
             {{ form.as_p }}
             </td>
         {% endfor %}
