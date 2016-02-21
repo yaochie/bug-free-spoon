@@ -44,12 +44,16 @@ class Itin():
     def create_itin(self, request):
         if request.method == 'POST':
             if request.POST['action']:
-                if request.POST['action'] == "hotel":
-                    self.formList.append(HotelForm())
-                elif request.POST['action'] == "attr":
-                    self.formList.append(AttractionForm())
-                elif request.POST['action'] == "meal":
-                    self.formList.append(MealForm())
+                #TODO: Stop and give message if too many forms added.
+                if len(self.formList) > 10:
+                    pass
+                else:
+                    if request.POST['action'] == "hotel":
+                        self.formList.append(HotelForm())
+                    elif request.POST['action'] == "attr":
+                        self.formList.append(AttractionForm())
+                    elif request.POST['action'] == "meal":
+                        self.formList.append(MealForm())
             else:
                 #validate and send info
                 if self.all_valid():
@@ -64,34 +68,7 @@ a = Itin()
 def create_itin_ext(request):
     global a
     return a.create_itin(request)
-                                  
-class Itin2(FormView):
-    template_name = 'maketrip/pretrip_itin3.html'
-    success_url = '/save_success/'
-   
-def create_itin2(request):
-    if request.method == 'POST':
-        print(request.POST.keys())
-        forms = request.POST['formlist']
-        print(forms)
-        if request.POST['action']:
-            if request.POST['action'] == "hotel":
-                #add hotel
-                #forms.append(HotelForm())
-                pass
-            elif request.POST['action'] == "attr":
-                #add attr
-                pass
-            elif request.POST['action'] == "meal":
-                #add meal
-                pass
-        #forms = [AttractionForm()]
-    else:
-        forms = [AttractionForm(), MealForm(), HotelForm()]
-    return render_to_response('maketrip/pretrip_itin3.html',
-                              {'forms': forms},
-                              context_instance=RequestContext(request))
-    
+                                 
 class SaveSuccess(generic.DetailView):
     template_name = "maketrip/save_success.html"
     
