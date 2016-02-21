@@ -7,11 +7,6 @@ function updateHotel() {
 }
 
 
-function checkSubString(a, b) {
-    for (i=0;i<
-
-
-}
 
 function initMap() {
     for (i=0;i<document.getElementById('id_hotels-TOTAL_FORMS').value;i++) {
@@ -34,6 +29,15 @@ function initMap() {
         autocomplete.push(new google.maps.places.Autocomplete(
             /** @type {!HTMLInputElement} */ (
             document.getElementById('id_placeName_'+i)), {
+                types: ['establishment']
+        }));
+    }
+    
+    str = id_placeName_;
+    for (i=0;thing=document.getElementById(prefix+i);i++) {
+        autocomplete.push(new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */ (
+            document.getElementById(prefix+i)), {
                 types: ['establishment']
         }));
     }
