@@ -38,12 +38,8 @@ class Itin():
         self.attr_count = 0
         self.hotel_count = 0
         self.meal_count = 0
-        self.formList = [[AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
-                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count+1))],
-                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count+2))],
-                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count+3))],
-                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count+4))]]
-        self.attr_count += 5
+        self.formList = [[AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))]]
+        self.attr_count += 1
         
     def has_changed(self):
         for form in self.formList[self.current]:
@@ -87,7 +83,7 @@ class Itin():
                     elif request.POST['action'] == "4":
                         self.current = 4
             #check for changes, and save any changes/update saved itin
-            print()
+            print(request.POST)
             if self.all_valid():
                 print("hi")
             else:
