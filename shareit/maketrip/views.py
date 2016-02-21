@@ -32,8 +32,11 @@ def create_itin(request):
                               context_instance=RequestContext(request))
 
 class Itin():
+    attr_count = 0
+    hotel_count = 0
+    meal_count = 0
     def __init__(self):
-        self.formList = [[AttractionForm()],
+        self.formList = [[AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
                          [AttractionForm()],
                          [AttractionForm()],
                          [AttractionForm()],
