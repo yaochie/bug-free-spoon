@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from other_pages import views
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^showtrip/', include('showtrip.urls')),
     url(r'^maketrip/', include('maketrip.urls')),
+    url(r'^$', views.home, name='home'),
 ]

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'showtrip',
     'maketrip',
+    'other_pages',
 )
 
 MIDDLEWARE_CLASSES = (
