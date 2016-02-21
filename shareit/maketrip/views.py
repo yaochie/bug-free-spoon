@@ -38,8 +38,12 @@ class Itin():
         self.attr_count = 0
         self.hotel_count = 0
         self.meal_count = 0
-        self.formList = [[AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))]]
-        self.attr_count += 1
+        self.formList = [[AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))],
+                         [AttractionForm(auto_id='id_%s_{0}'.format(self.attr_count))]]
+        self.attr_count += 5
         
     def has_changed(self):
         for form in self.formList[self.current]:
